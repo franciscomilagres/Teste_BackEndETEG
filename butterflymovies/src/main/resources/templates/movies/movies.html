@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thumeleaf/lalyout">
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+<!-- 	<!--Import Google Icon Font-->
+<!--     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+<!--     Import materialize.css -->
+<!--     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/> -->
+
+<!--     Let browser know website is optimized for mobile -->
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
+
 	<title>Filmes - ButterflyMovies</title>
 </head>
 <body>
 
 	<h3>Lista de filmes:</h3>
-	
-	<div th:each= "movie: ${movies}">
-		<div class="row">
-		<span th:text="${movie.name}"></span>
-		<span th:text="${movie.genre}"></span>
-		<span th:text="${movie.director}"></span>
-		<span th:text="${movie.quantity}"></span>
-		</div>
-	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>Filme</th>
+				<th>Gênero</th>
+				<th>Diretor</th>
+				<th>Quantidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each= "movie: ${movies}">
+				<td><span th:text="${movie.name}"></span></td>
+				<td><span th:text="${movie.genre}"></span></td>
+				<td><span th:text="${movie.director}"></span></td>
+				<td><span th:text="${movie.quantity}"></span></td>
+			</tr>
+		</tbody>	
+	</table>
 	
 	<a href="/filmes/cadastro">Cadastrar novo filme</a>
+
+	<!--JavaScript at end of body for optimized loading-->
+<!--     <script type="text/javascript" src="js/materialize.min.js"></script> -->
 
 </body>
 </html>

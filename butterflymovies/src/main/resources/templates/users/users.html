@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Usuários - ButterflyMovies</title>
+</head>
+<body>
+	<h3>Usuários cadastrados:</h3>
+	<a href="/usuarios/cadastro">Novo Usuário</a>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Sexo</th>
+				<th>CPF</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each= "user:${users}">
+				<td><span th:text="${user.name}"></span></td>				
+				<td><span th:text="${user.gender}"></span></td>
+				<td><span th:text="${user.cpf}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+
+</html>
