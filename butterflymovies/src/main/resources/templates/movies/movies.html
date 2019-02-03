@@ -1,7 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thumeleaf/lalyout">
+<head>
+	<title>Filmes - ButterflyMovies</title>
+</head>
 <body>
 
-<h3>Foi pra lista de filmes!</h3>
+	<h3>Lista de filmes:</h3>
+	
+	<div th:each= "movie: ${movies}">
+		<div class="row">
+		<span th:text="${movie.name}"></span>
+		<span th:text="${movie.genre}"></span>
+		<span th:text="${movie.director}"></span>
+		<span th:text="${movie.quantity}"></span>
+		</div>
+	</div>
+	
+	<a href="/filmes/cadastro">Cadastrar novo filme</a>
 
 </body>
 </html>
