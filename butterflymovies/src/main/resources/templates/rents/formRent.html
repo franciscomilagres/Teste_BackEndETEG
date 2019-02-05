@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+		
+	<!--Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<!--Import materialize.css -->
+    <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+
+	<!--Let browser know website is optimized for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <title>Nova Locação - Butterfly Movies</title>
+    
+</head>
+<body>
+	<h3>Registrar nova locação</h3>
+	
+	<div class="row">	
+		<form class= "col s12" action= "/locacoes" method="post">
+			<div class="row">
+				<div class="input-field col s1">
+					<input placeholder="ID" class="validate" type="number" id="movieId" name="movieId"/>
+					<label for="movieID">ID do filme:</label>
+				</div>
+				<div class="input-field col s1">
+					<input placeholder="ID" class="validate" type="number" id="userId" name="userId"/>
+					<label for="userID">ID do Usuário:</label>
+				</div>
+				<div class="input-field col s2">
+					<input placeholder="" class="validate" type="date" id="start" name="start"/>
+					<label for="start">Data de Inicio:</label>
+				</div>
+				<div class="input-field col s2">
+					<input placeholder="" class="validate" type="date" id="devolution" name="devolution"/>
+					<label for="devolution">Data de Devolução:</label>
+				</div>											
+			</div>
+			<button class="waves-effect waves-light btn" type="submit">Alugar!</button>
+		</form>
+	</div>
+	
+	
+	<!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>

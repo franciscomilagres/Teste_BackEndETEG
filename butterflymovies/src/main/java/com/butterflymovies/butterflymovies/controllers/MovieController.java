@@ -35,6 +35,6 @@ public class MovieController {
 	@RequestMapping(value= "/filmes", method = RequestMethod.POST)		//adicionando o novo filme
 	public String addMovie(Movie movie) {
 		mrepo.save(movie);
-		return "redirect:/filmes/";
+		return "redirect:/filmes";
 	}
 }
