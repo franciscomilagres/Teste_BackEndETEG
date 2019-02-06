@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Renting implements Serializable{
@@ -17,32 +18,34 @@ public class Renting implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	private long cod;
 	
-	private int movieId;
-	private int userId;
+	@ManyToOne()
+	private Movie movie;
+	
+	@ManyToOne
+	private User user;
+	
 	private String start, devolution;
+			
 	
-	
-	//is it necessary to create gets returning a User and a Movie?		
-
-	public long getId() {
-		return id;
+	public long getCod() {
+		return cod;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setCod(long cod) {
+		this.cod = cod;
 	}
-	public int getMovieId() {
-		return movieId;
+	public Movie getMovie() {
+		return movie;
 	}
-	public void setMovieId(int movieId) {
-		this.movieId = movieId;
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getStart() {
 		return start;

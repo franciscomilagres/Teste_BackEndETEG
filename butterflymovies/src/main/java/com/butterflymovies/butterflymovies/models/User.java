@@ -1,11 +1,13 @@
 package com.butterflymovies.butterflymovies.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable {
@@ -16,18 +18,21 @@ public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	private long cod;
 	
 	private String name;
 	private String gender;
 	private String cpf;
 	
+//	@OneToMany
+//	private List<Renting> rents;			//rents made by the user;
 	
-	public long getId() {
-		return id;
+	
+	public long getCod() {
+		return cod;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setCod(long cod) {
+		this.cod = cod;
 	}
 	public String getName() {
 		return name;
@@ -47,6 +52,5 @@ public class User implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	
+
 }

@@ -14,27 +14,30 @@
 </head>
 <body>
 	<h3>Locações realizadas:</h3>
-
-	<table>
-		<thead>
-		<tr>
-			<th>Locação</th>
-			<th>Filme</th>
-			<th>Usuário</th>
-			<th>Início</th>
-			<th>Devolução</th>
-		</tr>
-		</thead>
-		<tbody>
-			<tr th:each= "rent:${rents}">
-				<td><span th:text="${rent.id}"></span></td>
-				<td><span th:text="${rent.movieId}"></span></td>
-				<td><span th:text="${rent.userId}"></span></td>
-				<td><span th:text="${rent.start}"></span></td>
-				<td><span th:text="${rent.devolution}"></span></td>				
-			</tr>		
-		</tbody>	
-	</table>
+	
+	<a class="waves-effect waves-light btn" href="/locacoes/nova"><i class="material-icons left">add_circle_outline</i>Registrar Locação</a>
+	<div class="container">
+		<table>
+			<thead>
+			<tr>
+				<th>Locação</th>
+				<th>Filme</th>
+				<th>Usuário</th>
+				<th>Início</th>
+				<th>Devolução</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr th:each= "rent:${rents}">
+					<td><span th:text="${rent.cod}"></span></td>
+					<td><span th:text="${rent.movie.name}"></span></td>
+					<td><span th:text="${rent.user.name}"></span></td>
+					<td><span th:text="${rent.start}"></span></td>
+					<td><span th:text="${rent.devolution}"></span></td>				
+				</tr>		
+			</tbody>	
+		</table>
+	</div>
 	
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
