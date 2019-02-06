@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,8 +57,6 @@ public class RentController {
 		Movie movie = mrepo.findByCod(movieCod);
 		User user = urepo.findByCod(userCod);				//its so wonderful		
 		
-		
-		
 		quantity = movie.getQuantity();
 		if(quantity > 0) {
 			renting.setMovie(movie);
@@ -71,6 +70,15 @@ public class RentController {
 		}
 		else {
 			//keep calm
+		}
+		return "redirect:/locacoes";
+	}
+	
+	@RequestMapping(value="/locacoes/{cod}", method= RequestMethod.DELETE)
+	public String delRent(@PathVariable("cod") long cod) {
+		Renting rent = rrepo.findByCod(cod);
+		if(rent != null) {
+			rrepo.delete(rent);
 		}
 		return "redirect:/locacoes";
 	}

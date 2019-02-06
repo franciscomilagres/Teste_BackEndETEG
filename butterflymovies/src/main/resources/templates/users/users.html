@@ -33,16 +33,24 @@
 		<table>
 			<thead>
 				<tr>
+					<th>cod.</th>
 					<th>Nome</th>
 					<th>Sexo</th>
 					<th>CPF</th>
+					<th>Data Nasc.</th>
+					<th>Excluir</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each= "user:${users}">
+					<td><span th:text="${user.cod}"></span></td>
 					<td><span th:text="${user.name}"></span></td>				
 					<td><span th:text="${user.gender}"></span></td>
 					<td><span th:text="${user.cpf}"></span></td>
+					<td><span th:text="${user.nascimento}"></span></td>
+					<td><form th:method="delete" th:action="@{'/usuarios/{cod}'(cod=${user.cod})}">
+						<button class="waves-effect waves-light btn" type="submit"><i class="material-icons">delete</i></button>
+						</form></td>
 				</tr>
 			</tbody>
 		</table>

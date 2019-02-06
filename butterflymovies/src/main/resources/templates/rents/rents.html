@@ -39,6 +39,7 @@
 				<th>Usuário</th>
 				<th>Início</th>
 				<th>Devolução</th>
+				<th>Excluir</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -47,7 +48,10 @@
 					<td><span th:text="${rent.movie.name}"></span></td>
 					<td><span th:text="${rent.user.name}"></span></td>
 					<td><span th:text="${rent.start}"></span></td>
-					<td><span th:text="${rent.devolution}"></span></td>				
+					<td><span th:text="${rent.devolution}"></span></td>
+					<td><form th:method="delete" th:action="@{'/locacoes/{cod}'(cod=${rent.cod})}">
+						<button class="waves-effect waves-light btn" type="submit"><i class="material-icons">delete</i></button>
+						</form></td>
 				</tr>		
 			</tbody>	
 		</table>

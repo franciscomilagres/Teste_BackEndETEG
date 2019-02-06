@@ -24,6 +24,8 @@ public class User implements Serializable {
 	private String gender;
 	@NotEmpty
 	private String cpf;
+	@NotEmpty
+	private String nascimento;
 	
 //	@OneToMany
 //	private List<Renting> rents;			//rents made by the user;
@@ -53,5 +55,11 @@ public class User implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	public String getNascimento() {
+		return nascimento;
+	}
+	public void setNascimento(String nascimento) {
+		this.nascimento = nascimento;
+	}	
 
 }

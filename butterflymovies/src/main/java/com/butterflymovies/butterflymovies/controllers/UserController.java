@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +42,31 @@ public class UserController {
 		}
 		urepo.save(user);
 		return "redirect:/usuarios";
+	}
+	
+	@RequestMapping(value= "/usuarios/{cod}", method = RequestMethod.DELETE)
+	public String delUser(@PathVariable("cod") long cod) {
+		User user = urepo.findByCod(cod);
+		if(user != null) {
+			urepo.delete(user);
+		}
+		return "redirect:/usuarios";
+	}
+	
+	private boolean validateCPF(String cpf) {
+		boolean resp = false;
+		
+		if(cpf.length() == 11) {
+			int count=11;
+			int sum1=0, sum2=0;
+			for(int i=0; i < 11; i++) {
+				sum2+= cpf.charAt(i)*count--;
+				sum1+= cpf.charAt(i)*count;
+			}
+		}
+		
+		return resp;
+		
 	}
 	
 }

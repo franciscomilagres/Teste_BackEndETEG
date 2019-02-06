@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,4 +47,14 @@ public class MovieController {
 		//attr.addFlashAttribute("msg", "Filme cadastrado com sucesso!");
 		return "redirect:/filmes";
 	}
+	
+	@RequestMapping(value= "/filmes/{cod}", method = RequestMethod.DELETE)
+	public String delMovie(@PathVariable("cod") long cod) {
+		Movie movie = mrepo.findByCod(cod);
+		if(movie != null) {
+			mrepo.delete(movie);
+		}
+		return "redirect:/filmes";
+	}
+	
 }
