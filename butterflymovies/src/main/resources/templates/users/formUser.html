@@ -14,24 +14,45 @@
 </head>
 
 <body>
-	<h3>Cadastro de novo usuário:</h3>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">Cadsatro de novo usuário</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<!-- Redirects -->
+					<li><a class="waves-effect waves-light btn" href="/usuarios"><i class="material-icons">arrow_back</i></a></li>
+					<li><a class="waves-effect waves-light btn" href="/"><i class="material-icons">home</i></a></li>					
+				</ul>
+			</div>
+		</nav>
+	</header>
+	
+<!-- 	<h3>Cadastro de novo usuário:</h3>	 -->
+<!-- 	<a class="waves-effect waves-light btn" href="/usuarios"><i class="material-icons">arrow_back</i></a> -->
+<!-- 	<a class="waves-effect waves-light btn" href="/"><i class="material-icons">home</i></a>		 -->
+	
+	<!-- Error messages! -->
+	<th:block th:include="/validationMsg"></th:block>
+	
 	<div class="row">
 		<form class="col s12" action= "/usuarios" method="post">		
-			<div class="input-field col s6">
-				<input type="text" value="" name="name" id="nome"/>
-				<label for="nome">Nome:</label>
+			<div class="row">
+				<div class="input-field col s6">
+					<input type="text" value="" name="name" id="nome"/>
+					<label for="nome">Nome:</label>
+				</div>
+				<div class="input-field col s1">
+					<input type="text" value="" name="gender" id="sexo"/>
+					<label for="sexo">Sexo:</label>
+				</div>
+				<div class="input-field col s3">
+					<input placeholder="000.000.000-00" type="text" value="" name="cpf" id="cpf" maxlength="14"/>
+					<label for="cpf">CPF.:</label>
+				</div>
 			</div>
-			<div class="input-field col s1">
-				<input type="text" value="" name="gender" id="sexo"/>
-				<label for="sexo">Sexo:</label>
-			</div>
-			<div class="input-field col s3">
-				<input type="text" value="" name="cpf" id="cpf"/>
-				<label for="cpf">CPF.:</label>
-			</div>								
+			<button class="waves-effect waves-light btn" type="submit">Cadastrar!</button>
 		</form>
-	</div>
-	<button class="waves-effect waves-light btn" type="submit">Cadastrar!</button>
+	</div>	
 	
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>

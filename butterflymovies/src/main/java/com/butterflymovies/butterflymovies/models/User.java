@@ -1,13 +1,11 @@
 package com.butterflymovies.butterflymovies.models;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class User implements Serializable {
@@ -20,8 +18,11 @@ public class User implements Serializable {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long cod;
 	
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String gender;
+	@NotEmpty
 	private String cpf;
 	
 //	@OneToMany

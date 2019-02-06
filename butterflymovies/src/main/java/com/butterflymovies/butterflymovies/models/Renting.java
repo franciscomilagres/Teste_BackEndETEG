@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
 
 @Entity
 public class Renting implements Serializable{
@@ -26,6 +28,7 @@ public class Renting implements Serializable{
 	@ManyToOne
 	private User user;
 	
+	@NotEmpty
 	private String start, devolution;
 			
 	

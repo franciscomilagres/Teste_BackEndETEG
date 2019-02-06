@@ -16,7 +16,27 @@
 </head>
 
 <body>
-	<h2>Cadastro de novo filme:</h2>
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">Cadastro de novo filme</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<!-- Redirects -->
+					<li><a class="waves-effect waves-light btn" href="/filmes"><i class="material-icons">arrow_back</i></a></li>
+					<li><a class="waves-effect waves-light btn" href="/"><i class="material-icons">home</i></a></li>					
+				</ul>
+			</div>
+		</nav>
+	</header>
+	
+<!-- 	<h2>Cadastro de novo filme:</h2> -->
+<!-- 	<a class="waves-effect waves-light btn" href="/filmes"><i class="material-icons">arrow_back</i></a> -->
+<!-- 	<a class="waves-effect waves-light btn" href="/"><i class="material-icons">home</i></a>	 -->
+	
+	
+	<!-- Error Messages -->
+	<th:block th:include="/validationMsg"></th:block>
+	
 	<div class="row">	
 		<form class= "col s12" action= "/filmes" method="post">
 			<div class="row">

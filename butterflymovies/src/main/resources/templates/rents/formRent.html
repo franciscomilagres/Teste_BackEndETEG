@@ -14,26 +14,45 @@
     <title>Nova Locação - Butterfly Movies</title>
     
 </head>
-<body>
-	<h3>Registrar nova locação</h3>
+<body>	
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">Nova Locação</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<!-- Redirects -->
+					<li><a class="waves-effect waves-light btn" href="/locacoes"><i class="material-icons">arrow_back</i></a></li>
+					<li><a class="waves-effect waves-light btn" href="/"><i class="material-icons">home</i></a></li>					
+				</ul>
+			</div>
+		</nav>
+	</header>
+	
+	
+<!-- 	<h3>Registrar nova locação</h3>	 -->
+<!-- 	<a class="waves-effect waves-light btn" href="/locacoes"><i class="material-icons">arrow_back</i></a> -->
+<!-- 	<a class="waves-effect waves-light btn" href="/"><i class="material-icons">home</i></a> -->
+	
+	<!-- Error Messages -->
+	<th:block th:include="/validationMsg"></th:block>
 	
 	<div class="row">	
 		<form class= "col s12" action= "/locacoes" method="post">
 			<div class="row">
 				<div class="input-field col s1">
-					<input placeholder="cod" class="validate" type="number" id="movieCod" name="movieCod"/>
+					<input placeholder="cod" class="validate" type="number" id="movieCod" name="movieCod" value="0"/>
 					<label for="movieCod">Cód. filme:</label>
 				</div>
 				<div class="input-field col s1">
-					<input placeholder="cod" class="validate" type="number" id="userCod" name="userCod"/>
+					<input placeholder="cod" class="validate" type="number" id="userCod" name="userCod" value="0">
 					<label for="userCod">Cód. usuário:</label>
 				</div>
 				<div class="input-field col s2">
-					<input placeholder="" class="validate" type="date" id="start" name="start"/>
+					<input placeholder="" class="validate" type="date" id="start" name="start" value=""/>
 					<label for="start">Data de Inicio:</label>
 				</div>
 				<div class="input-field col s2">
-					<input placeholder="" class="validate" type="date" id="devolution" name="devolution"/>
+					<input placeholder="" class="validate" type="date" id="devolution" name="devolution" value=""/>
 					<label for="devolution">Data de Devolução:</label>
 				</div>
 			</div>

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Movie implements Serializable{
@@ -18,9 +19,13 @@ public class Movie implements Serializable{
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long cod;
 	
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String genre;
+	@NotEmpty
 	private String director;
+
 	private int quantity;
 	
 //	@OneToMany
