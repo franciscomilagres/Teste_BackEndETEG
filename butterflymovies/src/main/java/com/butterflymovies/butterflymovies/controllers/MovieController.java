@@ -43,8 +43,12 @@ public class MovieController {
 			attr.addFlashAttribute("msg", "Todos os campos devem ser preenchidos!");
 			return "redirect:/filmes/cadastro";
 		}
+		else if (movie.getQuantity() < 0) {
+			attr.addFlashAttribute("msg", "Não é possível cadastrar filmes em dívida!");
+			return "redirect:/filmes/cadastro";			
+		}
 		mrepo.save(movie);
-		//attr.addFlashAttribute("msg", "Filme cadastrado com sucesso!");
+		//attr.addFlashAttribute("msg", "Filme cadastrado com sucesso!");		//desnecessaur
 		return "redirect:/filmes";
 	}
 	

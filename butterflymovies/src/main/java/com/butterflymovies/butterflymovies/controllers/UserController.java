@@ -1,5 +1,10 @@
 package com.butterflymovies.butterflymovies.controllers;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,12 +41,26 @@ public class UserController {
 	
 	@RequestMapping(value= "/usuarios", method = RequestMethod.POST)
 	public String addUser(@Valid User user, BindingResult res, RedirectAttributes attr) {
+		
 		if(res.hasErrors()) {
 			attr.addFlashAttribute("msg", "Todos os campos devem ser preenchidos!");
 			return "redirect:/usuarios/cadastro";
 		}
+		else if(!this.validateNasc(user.getNascimento())){
+			attr.addFlashAttribute("msg", "O Usuário deve ser maior de idade!");
+			return "redirect:/usuarios/cadastro";						//alternatives are similar but on future would be changed
+		}
+		else if(!this.validateCPF(user.getCpf())) {
+			attr.addFlashAttribute("msg", "CPF inválido!");
+			return "redirect:/usuarios/cadastro";
+		}
+		else if(urepo.findByCpf(user.getCpf()) != null) {
+			attr.addFlashAttribute("msg", "CPF já cadastrado!");
+			return "redirect:/usuarios/cadastro";
+		}
 		urepo.save(user);
 		return "redirect:/usuarios";
+
 	}
 	
 	@RequestMapping(value= "/usuarios/{cod}", method = RequestMethod.DELETE)
@@ -53,20 +72,46 @@ public class UserController {
 		return "redirect:/usuarios";
 	}
 	
-	private boolean validateCPF(String cpf) {
-		boolean resp = false;
+	private boolean validateCPF(String cpf) {			//verifies CPF digits;
+		boolean resp = false;		
 		
 		if(cpf.length() == 11) {
 			int count=11;
 			int sum1=0, sum2=0;
-			for(int i=0; i < 11; i++) {
-				sum2+= cpf.charAt(i)*count--;
-				sum1+= cpf.charAt(i)*count;
+			for(int i=0; i < 9; i++) {
+				sum2+= count * Character.getNumericValue(cpf.charAt(i));
+				sum1+= (count-1) * Character.getNumericValue(cpf.charAt(i));
+				count--;
 			}
+			sum2+= Character.getNumericValue(cpf.charAt(9)) * count;
+			
+			if(((sum1*10)%11)%10 == Character.getNumericValue(cpf.charAt(9)) &&
+									((sum2*10)%11)%10 == Character.getNumericValue(cpf.charAt(10))) { 	//validating digits.
+				resp = true;
+			}
+			return resp;			
 		}
 		
-		return resp;
+		return resp;		
+	}
+
+	private boolean validateNasc(String nasc) {		//if user is 18+ returns true. else, false;
+
+		LocalDate datenasc;
+		try{
+			datenasc = LocalDate.parse(nasc, DateTimeFormatter.ISO_DATE);
+		} catch(DateTimeParseException e) {
+			System.out.println("UserController msg: Date is invalid");
+			return false;
+		}
+		LocalDate today = LocalDate.now();							//Java deprecated Date gets and this became boring!
 		
+		if (Period.between(datenasc,today).getYears() < 18) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 }
