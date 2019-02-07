@@ -30,6 +30,8 @@ public class Renting implements Serializable{
 	
 	@NotEmpty
 	private String start, devolution;
+	
+	private int renews=0;
 			
 	
 	public long getCod() {
@@ -61,6 +63,12 @@ public class Renting implements Serializable{
 	}
 	public void setDevolution(String devolution) {
 		this.devolution = devolution;
-	}		
+	}
+	public int getRenews() {
+		return renews;
+	}
+	public void setRenews(int renews) {
+		this.renews = renews;
+	}
 	
 }

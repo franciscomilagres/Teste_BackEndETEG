@@ -27,10 +27,12 @@ public class User implements Serializable {
 	@NotEmpty
 	private String nascimento;
 	
+	private int moviesNumber;
+	
 //	@OneToMany
 //	private List<Renting> rents;			//rents made by the user;
 	
-	
+		
 	public long getCod() {
 		return cod;
 	}
@@ -60,6 +62,12 @@ public class User implements Serializable {
 	}
 	public void setNascimento(String nascimento) {
 		this.nascimento = nascimento;
-	}	
+	}
+	public int getMoviesNumber() {
+		return moviesNumber;
+	}
+	public void setMoviesNumber(int moviesNumber) {
+		this.moviesNumber = moviesNumber;
+	}
 
 }

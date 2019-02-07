@@ -25,7 +25,7 @@
 		</nav>
 	</header>
 
-
+	<th:block th:include="/validationMsg"></th:block>
 <!-- 	<h3>Locações realizadas:</h3>	 -->
 <!-- 	<a class="waves-effect waves-light btn" href="/"><i class="material-icons">arrow_back</i></a> -->
 <!-- 	<a class="waves-effect waves-light btn" href="/locacoes/nova"><i class="material-icons left">add_circle_outline</i>Registrar Locação</a> -->
@@ -40,6 +40,7 @@
 				<th>Início</th>
 				<th>Devolução</th>
 				<th>Excluir</th>
+				<th>Renovar</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -52,6 +53,11 @@
 					<td><form th:method="delete" th:action="@{'/locacoes/{cod}'(cod=${rent.cod})}">
 						<button class="waves-effect waves-light btn" type="submit"><i class="material-icons">delete</i></button>
 						</form></td>
+					<td><form th:method="put" th:action="@{'/locacoes/{cod}'(cod=${rent.cod})}">
+						<div class="row">
+							<input placeholder="" class="validate" type="date" id="newdev" name="devolution" value=""/>					
+							<button class="waves-effect waves-light btn" type="submit"><i class="material-icons tiny">update</i></button>
+						</div></form></td>
 				</tr>		
 			</tbody>	
 		</table>

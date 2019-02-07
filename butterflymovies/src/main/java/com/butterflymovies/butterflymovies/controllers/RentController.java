@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.butterflymovies.butterflymovies.models.Historic;
 import com.butterflymovies.butterflymovies.models.Movie;
 import com.butterflymovies.butterflymovies.models.Renting;
 import com.butterflymovies.butterflymovies.models.User;
+import com.butterflymovies.butterflymovies.repositories.HistoricRepository;
 import com.butterflymovies.butterflymovies.repositories.MovieRepository;
 import com.butterflymovies.butterflymovies.repositories.RentRepository;
 import com.butterflymovies.butterflymovies.repositories.UserRepository;
@@ -28,6 +30,9 @@ public class RentController {
 	
 	@Autowired
 	UserRepository urepo;
+	
+	@Autowired
+	HistoricRepository hrepo;
 	
 	@RequestMapping(value= "/locacoes", method = RequestMethod.GET)
 	public ModelAndView listRents() {
@@ -49,11 +54,12 @@ public class RentController {
 			attr.addFlashAttribute("msg", "Todos os campos devem ser preenchidos corretamente!");
 			return "redirect:/locacoes/nova";
 		}
-
+		
+		Historic historic = new Historic();
 		int quantity;
 		Renting renting = new Renting();
 		Movie movie = mrepo.findByCod(movieCod);
-		User user = urepo.findByCod(userCod);				//its so wonderful		
+		User user = urepo.findByCod(userCod);				//its so wonderful	
 		
 		if(movie == null) {
 			attr.addFlashAttribute("msg", "Filme não existe!");
@@ -76,6 +82,10 @@ public class RentController {
 				renting.setDevolution(devolution);
 				movie.setQuantity(quantity-1);
 				
+				historic.setData("O filme " + movie.getName() + " foi alugado por " + user.getName() + " no dia " + start +
+									" para o dia " + devolution);
+				hrepo.save(historic);
+				
 				mrepo.save(movie);			//updating movie quantity!
 				rrepo.save(renting);
 				return "redirect:/locacoes";
@@ -95,15 +105,32 @@ public class RentController {
 			rrepo.delete(rent);
 		}
 		return "redirect:/locacoes";
-	}
+	}	
 	
-/*	@RequestMapping(value="/locacoes/{cod}", method= RequestMethod.PUT)
-	public String updateRent(@PathVariable("cod") long cod, Renting rent, @Valid String devolution) {
-		Renting rentdb = rrepo.findByCod(cod);
-		if(rentdb==null) {
-			attr.addFlashAttribute("msg", "Locação não encontrada!");			
+	@RequestMapping(value="/locacoes/{cod}", method= RequestMethod.PUT)
+	public String updateRent(@PathVariable("cod") long cod, String devolution, RedirectAttributes attr) {
+		Renting rent = rrepo.findByCod(cod);
+		if(devolution == "") {
+			attr.addFlashAttribute("msg", "Preencha a data!");
+			return "redirect:/locacoes";
 		}
+		if(rent == null) {
+			attr.addFlashAttribute("msg", "Locação inválida!");
+			return "/validationMsg";
+		}
+		if(rent.getRenews() == 2) {
+			attr.addFlashAttribute("msg", "Locação já foi renovada duas vezes!");
+			return "redirect:/locacoes";
+		}
+		Historic historic = new Historic();
+		int r = rent.getRenews();
+		rent.setDevolution(devolution);
+		rent.setRenews(r+1);
+		rrepo.save(rent);
+		
+		historic.setData("O filme " + rent.getMovie().getName() + " foi renovado por " + rent.getUser().getName() + " para o dia " + devolution);
+		hrepo.save(historic);
 		
 		return "redirect:/locacoes";
-	}*/
+	}
 }
