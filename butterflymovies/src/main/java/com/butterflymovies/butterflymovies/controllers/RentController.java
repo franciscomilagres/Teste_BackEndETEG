@@ -91,7 +91,7 @@ public class RentController {
 				return "redirect:/locacoes";
 			}
 		}
-	}
+	}		
 	
 	@RequestMapping(value="/locacoes/{cod}", method= RequestMethod.DELETE)
 	public String delRent(@PathVariable("cod") long cod) {
@@ -133,4 +133,21 @@ public class RentController {
 		
 		return "redirect:/locacoes";
 	}
+	
+	@RequestMapping(value="/locacoes/historico", method= RequestMethod.GET)
+	public ModelAndView showHistoric() {
+		ModelAndView mav = new ModelAndView("/rents/historic");
+		Iterable<Historic> historic = hrepo.findAll();
+		
+		mav.addObject("historic", historic);
+		return mav;
+		
+	}
+	@RequestMapping(value="/locacoes/historico", method= RequestMethod.DELETE)
+	public String clearHistoric() {
+		hrepo.deleteAll();
+		
+		return "redirect:/locacoes/historico";
+	}
+	
 }
